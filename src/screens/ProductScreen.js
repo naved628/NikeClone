@@ -1,21 +1,31 @@
-import { View, Text, FlatList, Image, StyleSheet } from "react-native";
-import React from "react";
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Pressable,
+} from "react-native";
 import products from "../data/products";
+import { useNavigation } from "@react-navigation/native";
 
-const ProductScreen = () => {
+const ProductScreen = ({navigation}) => {
+//   const navigation = useNavigation();
   return (
     <FlatList
       showsVerticalScrollIndicator={false}
       data={products}
       renderItem={({ item }) => (
-        <View style={styles.itemContainer}>
+        <Pressable
+          // @ts-ignore
+          onPress={() => navigation.navigate("Product Details")}
+          style={styles.itemContainer}
+        >
           <Image
             source={{
               uri: item.image,
             }}
             style={styles.image}
           />
-        </View>
+        </Pressable>
       )}
       numColumns={2}
     />

@@ -19,7 +19,7 @@ const ProductDetailsScreen = () => {
   }
   return (
     <View>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <FlatList
           data={product.images}
           renderItem={({ item }) => (
