@@ -1,4 +1,5 @@
-import { FlatList, Pressable, StyleSheet, Text } from "react-native";
+// @ts-nocheck
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import CartListItem from "../../components/CartListItem";
 import ShoppingCartTotals from "./ShoppingCartTotals";
 import { useSelector } from "react-redux";
@@ -6,15 +7,16 @@ import { useSelector } from "react-redux";
 const ShoppingCart = () => {
   // @ts-ignore
   const cartItems = useSelector((state) => state.cart.items);
+
   return (
     <>
-    <FlatList
+      <FlatList
         data={cartItems}
         renderItem={({ item }) => <CartListItem cartItem={item} />}
         ListFooterComponent={ShoppingCartTotals}
       />
       <Pressable style={styles.button}>
-        <Text style={styles.buttonText}>Add to cart</Text>
+        <Text style={styles.buttonText}>Checkout</Text>
       </Pressable>
     </>
   );
