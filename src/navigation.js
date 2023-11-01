@@ -2,7 +2,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Pressable, StyleSheet, Text } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
 import ProductScreen from "./screens/ProductScreen";
@@ -14,6 +14,7 @@ import {selectNumberOfItems } from "./store/cartSlice";
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
   const numofSelectedItems = useSelector(selectNumberOfItems);
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -25,12 +26,20 @@ const Navigation = () => {
           options={({ navigation }) => ({
             headerRight: () => (
               <Pressable
-                onPress={() => navigation.navigate("Cart")}
+                onPress={() => navigation.navigate('Cart')}
                 style={styles.iconStyle}
               >
                 <FontAwesome5 name="shopping-cart" size={18} color="gray" />
                 <Text style={styles.iconText}>{numofSelectedItems.length}</Text>
               </Pressable>
+            ),
+            headerLeft: () => (
+              <MaterialCommunityIcons
+              onPress={() => navigation.navigate('Track Order')}
+                name="truck-delivery"
+                size={22}
+                color="gray"
+              />
             ),
           })}
         />

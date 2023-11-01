@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   View,
   Text,
   TextInput,
   StyleSheet,
   ActivityIndicator,
-} from 'react-native';
-import { useGetOrderQuery } from '../store/apiSlice';
+} from "react-native";
+import { useGetOrderQuery } from "../store/apiSlice";
 
 const TrackOrder = () => {
-  const [ref, setRef] = useState('');
+  const [ref, setRef] = useState("");
   const { data, isLoading, error } = useGetOrderQuery(ref);
 
   return (
@@ -22,8 +22,8 @@ const TrackOrder = () => {
       />
 
       {isLoading && <ActivityIndicator />}
-      {data?.status !== 'OK' && <Text>Order not found</Text>}
-      {data?.status === 'OK' && (
+      {data?.status !== "OK" && <Text style={styles.orderText}>Order not found</Text>}
+      {data?.status === "OK" && (
         <Text>{JSON.stringify(data.data, null, 2)}</Text>
       )}
     </View>
@@ -35,11 +35,15 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   input: {
-    borderColor: 'lightgrey',
+    borderColor: "lightgrey",
     borderWidth: 1,
     padding: 10,
     borderRadius: 5,
   },
+  orderText:{
+    paddingVertical:8,
+    fontWeight:'600'
+  }
 });
 
 export default TrackOrder;
