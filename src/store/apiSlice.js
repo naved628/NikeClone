@@ -1,13 +1,13 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseUrl = 'http://localhost:3000/';
+const baseUrl = "http://localhost:3000/";
 
 export const apiSlice = createApi({
-  reducerPath: 'api',
+  reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: () => 'products',
+      query: () => "products",
     }),
     getProduct: builder.query({
       query: (id) => `products/${id}`,
@@ -15,8 +15,8 @@ export const apiSlice = createApi({
     // Orders
     createOrder: builder.mutation({
       query: (newOrder) => ({
-        url: 'orders',
-        method: 'POST',
+        url: "orders",
+        method: "POST",
         body: newOrder,
       }),
     }),
@@ -26,8 +26,8 @@ export const apiSlice = createApi({
     // Payments
     createPaymentIntent: builder.mutation({
       query: (data) => ({
-        url: 'payments/intents',
-        method: 'POST',
+        url: "payments/intents",
+        method: "POST",
         body: data,
       }),
     }),
@@ -39,5 +39,5 @@ export const {
   useGetProductsQuery,
   useCreateOrderMutation,
   useGetOrderQuery,
-  useCreatePaymentIntentMutation
+  useCreatePaymentIntentMutation,
 } = apiSlice;
