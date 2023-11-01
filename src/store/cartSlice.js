@@ -40,6 +40,8 @@ export const cartSlice = createSlice({
   },
 });
 
+export const selectNumberOfItems = (state) => state.cart.items.length;
+
 export const selectedSubTotal = (state) =>
   state.cart.items.reduce(
     (sum, cartItem) => sum + cartItem.product.price * cartItem.quantity,

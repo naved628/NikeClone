@@ -1,17 +1,19 @@
 // @ts-nocheck
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ProductScreen from "./screens/ProductScreen";
-import ProductDetailsScreen from "./screens/ProductDetailsScreen";
-import ShoppingCart from "./screens/ShoppingCart";
 import { Pressable, StyleSheet, Text } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
-import { cartSlice } from "./store/cartSlice";
+
+import ProductScreen from "./screens/ProductScreen";
+import ProductDetailsScreen from "./screens/ProductDetailsScreen";
+import ShoppingCart from "./screens/ShoppingCart";
+import TrackOrder from './screens/TrackOrder';
+import {selectNumberOfItems } from "./store/cartSlice";
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
-  const numofSelectedItems = useSelector((state) => state.cart.items);
+  const numofSelectedItems = useSelector(selectNumberOfItems);
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -23,7 +25,7 @@ const Navigation = () => {
           options={({ navigation }) => ({
             headerRight: () => (
               <Pressable
-                onPress={() => navigation.navigate("Shopping Carts")}
+                onPress={() => navigation.navigate("Cart")}
                 style={styles.iconStyle}
               >
                 <FontAwesome5 name="shopping-cart" size={18} color="gray" />
@@ -37,7 +39,8 @@ const Navigation = () => {
           component={ProductDetailsScreen}
           options={{ presentation: "modal" }}
         />
-        <Stack.Screen name="Shopping Carts" component={ShoppingCart} />
+        <Stack.Screen name="Cart" component={ShoppingCart} />
+        <Stack.Screen name="Track Order" component={TrackOrder} />
       </Stack.Navigator>
     </NavigationContainer>
   );
