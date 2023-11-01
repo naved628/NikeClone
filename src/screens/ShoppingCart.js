@@ -1,16 +1,14 @@
 // @ts-nocheck
 import {
-  FlatList,
-  Pressable,
-  StyleSheet,
   Text,
+  FlatList,
   View,
+  StyleSheet,
+  Pressable,
   ActivityIndicator,
-} from "react-native";
-import CartListItem from "../../components/CartListItem";
-import ShoppingCartTotals from "./ShoppingCartTotals";
-import { useSelector, useDispatch } from "react-redux";
-
+  Alert,
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   selectDeliveryPrice,
   selectSubtotal,
@@ -22,6 +20,8 @@ import {
   useCreatePaymentIntentMutation,
 } from '../store/apiSlice';
 import { useStripe } from '@stripe/stripe-react-native';
+import ShoppingCartTotals from './ShoppingCartTotals';
+import CartListItem from '../components/CartListItem';
 
 const ShoppingCart = () => {
   const subtotal = useSelector(selectSubtotal);
@@ -42,20 +42,19 @@ const ShoppingCart = () => {
     const response = await createPaymentIntent({
       amount: Math.floor(total * 100),
     });
-    console.log(response,'response');
     if (response.error) {
-      Alert.alert("Something went wrong");
+      Alert.alert('Something went wrong');
       return;
     }
 
     // 2. Initialize the Payment sheet
     const initResponse = await initPaymentSheet({
-      merchantDisplayName: "notJust.dev",
+      merchantDisplayName: 'notJust.dev',
       paymentIntentClientSecret: response.data.paymentIntent,
     });
     if (initResponse.error) {
       console.log(initResponse.error);
-      Alert.alert("Something went wrong");
+      Alert.alert('Something went wrong');
       return;
     }
 
@@ -81,15 +80,15 @@ const ShoppingCart = () => {
       deliveryFee,
       total,
       customer: {
-        name: "naved",
-        address: "My home",
-        email: "navedkhan9279@gmail.com",
+        name: 'Vadim',
+        address: 'My home',
+        email: 'vadim@notjust.dev',
       },
     });
 
-    if (result.data?.status === "OK") {
+    if (result.data?.status === 'OK') {
       Alert.alert(
-        "Order has been submitted",
+        'Order has been submitted',
         `Your order reference is: ${result.data.data.ref}`
       );
       dispatch(cartSlice.actions.clear());
@@ -105,27 +104,28 @@ const ShoppingCart = () => {
       />
       <Pressable onPress={onCheckout} style={styles.button}>
         <Text style={styles.buttonText}>
-          Checkout Checkout
+          Checkout
           {isLoading && <ActivityIndicator />}
         </Text>
       </Pressable>
     </>
   );
 };
+
 const styles = StyleSheet.create({
   button: {
-    position: "absolute",
-    backgroundColor: "black",
+    position: 'absolute',
+    backgroundColor: 'black',
     bottom: 30,
-    width: "90%",
-    alignSelf: "center",
+    width: '90%',
+    alignSelf: 'center',
     padding: 20,
     borderRadius: 100,
-    alignItems: "center",
+    alignItems: 'center',
   },
   buttonText: {
-    color: "white",
-    fontWeight: "500",
+    color: 'white',
+    fontWeight: '500',
     fontSize: 16,
   },
 });
