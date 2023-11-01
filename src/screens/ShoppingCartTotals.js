@@ -1,12 +1,16 @@
 // @ts-nocheck
 import { StyleSheet, Text, View } from "react-native";
 import { useSelector } from "react-redux";
-import { selectDeliveryPrice, selectTotalAmount, selectedSubTotal } from "../store/cartSlice";
+import {
+  selectDeliveryPrice,
+  selectSubtotal,
+  selectTotal,
+} from '../store/cartSlice';
 
 const ShoppingCartTotals = () => {
-    const subTotal = useSelector(selectedSubTotal);
+    const subTotal = useSelector(selectSubtotal);
     const deliveryFee = useSelector(selectDeliveryPrice);
-    const totalAmount = useSelector(selectTotalAmount);
+    const totalAmount = useSelector(selectTotal);
   return (
     <View style={styles.totalsContainer}>
       <View style={styles.row}>

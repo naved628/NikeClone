@@ -12,6 +12,7 @@ import TrackOrder from './screens/TrackOrder';
 import {selectNumberOfItems } from "./store/cartSlice";
 
 const Stack = createNativeStackNavigator();
+
 const Navigation = () => {
   const numofSelectedItems = useSelector(selectNumberOfItems);
 
@@ -30,7 +31,7 @@ const Navigation = () => {
                 style={styles.iconStyle}
               >
                 <FontAwesome5 name="shopping-cart" size={18} color="gray" />
-                <Text style={styles.iconText}>{numofSelectedItems.length}</Text>
+                <Text style={styles.iconText}>{numofSelectedItems}</Text>
               </Pressable>
             ),
             headerLeft: () => (
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   iconText: {
-    marginLeft: 5,
+    marginLeft: 8,
     fontWeight: "500",
   },
 });

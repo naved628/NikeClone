@@ -2,7 +2,6 @@
 import {
   Text,
   FlatList,
-  View,
   StyleSheet,
   Pressable,
   ActivityIndicator,
